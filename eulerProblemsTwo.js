@@ -163,3 +163,57 @@ var numberOfSundays = function(dayOfWeek){
   }
   return numberOfDays;
 };
+
+var sumOfFactorial = function(num){
+  if(num < 0){
+    return "what you doing foo?";
+  }
+  if(num < 2){
+    return 1;
+  }
+  var i = 2;
+  var fn = 0;
+  var facts = [1];
+  var factString = '';
+  var stillInt = true;
+  while (i <= num){
+
+    if( i % 10 === 0){
+      facts[fn] = facts[fn] *(i/10);
+    }else{
+      facts[fn] = facts[fn] * i;
+    }
+    while( facts[fn] % 10 === 0){
+      facts[fn] = facts[fn]/ 10;
+    }
+
+    i++;
+    if(facts[fn] * i > 9007199254740991){
+      facts[fn] = facts[fn].toString();
+      facts.push(1);
+      fn++;
+    }
+  }
+  debugger; 
+  var factStringRight = '';
+  var ones = 0;
+  var tens = 0;
+  var hundreds = 0;
+  for (var place = 0; place < factString.length; place++) {
+
+    var tempVal = parseInt(factString[place]) * i;
+    ones = ones + (tempVal % 10);
+    if( ones !== 0){
+      factStringRight = ones.toString() + factStringRight;
+    }
+    ones = tens + Math.floor((tempVal% 100)/10);
+    tens = Math.floor(tempVal /100);
+  }
+  factString = factStringRight;
+
+  var sum = 0;
+  for (var j = 0; j < factString.length; j++) {
+    sum += parseInt(factString[j]);
+  }
+  return sum;
+};
