@@ -51,7 +51,7 @@ var pentagonal = function(n){
 };
 var isPentagonal = function(num){
   var n = (2*num +1) /3;
-  debugger; 
+  debugger;
   if(Math.floor(n) === n && n > 1){
     return true;
   }else{
@@ -76,4 +76,49 @@ var pairPents = function(){
     j = i +1;
   }
   return "we failed!";
+};
+
+var sumOfPowers = function(num){
+  if(num < 1){
+    return "what you doing foo?";
+  }
+  if(num < 2){
+    return 1;
+  }
+  var i = 2;
+  var sum = 1;
+  var factString = '';
+  var stillInt = true;
+  while (i <= num){
+    if(Math.pow(i, i) < 10000000000){
+      sum = sum + Math.pow(i, i);
+    }else{
+      var count = i;
+      var tempPow = 1;
+      while(count > 0){
+        tempPow = tempPow * i;
+        if(tempPow > 10000000000){
+          tempPow = tempPow % 10000000000;
+        }
+        count -=1;
+      }
+      sum = sum + tempPow;
+    }
+    sum = sum % 10000000000;
+    i++;
+  }
+
+  return sum;
+};
+
+var powerDigitSum = function(base, power){
+  var sum = 0;
+  var sumString = '';
+  var maxInt = 9007199254740991;
+  var tempPow = 1;
+  var tempPowString = '';
+  var i = 0;
+  while(i <= power){
+    return "failing!";
+  }
 };

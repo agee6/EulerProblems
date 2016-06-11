@@ -42,6 +42,116 @@ var isPrime = function(num){
   }
   return true;
 };
+var isTruncatedPrime = function(number){
+  var last = number % 10;
+  if(!(last === 7 || last === 3) ){
+    return false;
+  }
+  if(!isPrime(number)){
+    return false;
+  }
+  var stringNum = number.toString();
+  for (var i = 1; i < stringNum.length-1; i++) {
+    if(!isPrime(parseInt(stringNum.slice(i)))){
+      return false;
+    }
+  }
+  for (var j = 1; j < stringNum.length; j++) {
+    if(!isPrime(parseInt(stringNum.substr(0,j)))){
+      return false;
+    }
+  }
+  return true;
+
+};
+
+var truncatedPrimes = function(){
+  var start = new Date();
+
+  var count = 0;
+  var sum = 0;
+  var i = 11;
+  while (count < 11){
+    if(isTruncatedPrime(i)){
+      count +=1;
+      sum += i;
+    }
+    i += 2;
+
+  }
+  var finish = new Date();
+  console.log((finish-start)/1000);
+  return sum;
+};
+
+var truncatedPrimesFailed = function(){
+
+  var firsts = ['2', '3', '5', '7'];
+  var mids = ['3', '7', '9'];
+  var lasts = ['3', '7'];
+  var count = 0;
+  var size = 2;
+  var currentSize = size;
+  var currentNum = '';
+  while(count < 11){
+    currentSize = size;
+    for (var i = 0; i < firsts.length; i++) {
+      currentNum += firsts[i];
+      for (var j = 0; j < mids.length; j++) {
+        currentNum += mids[j];
+        for (var k = 0; k < lasts.length; k++) {
+          currentNum += lasts[k];
+
+        }
+      }
+
+    }
+
+  }
+};
+
+var isCircularPrime = function(num){
+
+  if(!isPrime(num)){
+    return false;
+  }
+  var string = num.toString();
+  var numRotations = string.length;
+  while(numRotations > 0){
+    string = rotateString(string);
+    if(!isPrime(parseInt(string))){
+      return false;
+    }
+    numRotations -= 1;
+  }
+  return true;
+
+};
+
+var rotateString = function(string){
+  var newString = string.slice(1);
+  newString = newString + string[0];
+  return newString;
+};
+
+var numCircularPrimes = function(maxNum){
+  if(maxNum < 3){
+    return 0;
+  }
+  if(maxNum === 3){
+    return 1;
+  }
+  var count = 1;
+  var i = 3;
+  while(i < maxNum){
+    if(isCircularPrime(i)){
+      count++;
+    }
+    i += 2;
+  }
+  return count;
+
+};
 var largestPalindrome = function(digits){
   var n1 = 999;
   var n2 = 999;
@@ -71,6 +181,32 @@ var isPalindrome = function(num){
     i+=1;
   }
   return true;
+};
+
+var isBinaryPalindrome = function(num){
+  var string = (num >>> 0).toString(2);
+  var i = 0;
+  while (i < string.length/2 ){
+
+    if(string[i] !== string[string.length -1-i]){
+      return false;
+    }
+    i+=1;
+  }
+  return true;
+
+};
+
+var sumDoublePalindromes = function(maxNum){
+  var sum = 1;
+  var i = 3;
+  while(i < maxNum){
+      if(isBinaryPalindrome(i) && isPalindrome(i)){
+        sum += i;
+      }
+      i += 2;
+  }
+  return sum;
 };
 
 var smallestAllDivisor = function(num){
