@@ -479,6 +479,7 @@ var pathCounter = function(size){
   }
   return numberOfPaths;
 };
+
 var consecutivePrimeFactors = function(num){
   var i = 1;
   var consecutive = [];

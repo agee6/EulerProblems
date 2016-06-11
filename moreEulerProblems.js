@@ -122,3 +122,90 @@ var powerDigitSum = function(base, power){
     return "failing!";
   }
 };
+
+var divisors = function(num){
+  //this is divisors not including self
+  if(num < 2){
+    return [];
+  }
+  var divs = [1];
+  var theSqrt = Math.sqrt(num);
+  if(theSqrt === Math.floor(theSqrt)){
+    divs.push(theSqrt);
+  }
+  var i = 2;
+  while(i < theSqrt){
+    if(num % i === 0){
+      divs.push(i);
+      divs.push(num/i);
+    }
+    i++;
+  }
+  return divs;
+};
+
+var d = function(number){
+  var divs = divisors(number);
+  var sum = 0;
+  for (var i = 0; i < divs.length; i++) {
+    sum += divs[i];
+  }
+  return sum;
+};
+var isAmicable = function(num){
+  var pair = d(num);
+  return d(pair) === num && num !== pair;
+};
+
+var sumOfAmicable = function(maxNum){
+  var sum = 0;
+  var i = 2;
+  while(i < maxNum){
+    if(isAmicable(i)){
+      sum += i;
+    }
+    i++;
+  }
+  return sum;
+};
+var isAbundant = function(num){
+  if(d(num) > num){
+    return true;
+  }else{
+    return false;
+  }
+};
+var sumOfAbundants = function(num){
+  if(num < 24){
+    return false;
+  }
+  var i = 12;
+  while(i <= num/2){
+    if(isAbundant(i) && isAbundant(num-i)){
+      return true;
+    }
+    i++;
+  }
+  return false;
+};
+
+
+var sumOfAllUnabundant = function(maxNum){
+  var sum = 0;
+  for (var i = 1; i < 24; i++) {
+    sum += i;
+  }
+  var j = 25;
+  while(j < maxNum){
+    if(!sumOfAbundants(j)){
+      sum +=j;
+    }
+    j++;
+  }
+  return sum;
+};
+
+var fibonacciBySize = function(size){
+  var
+
+}
