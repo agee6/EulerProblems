@@ -205,7 +205,74 @@ var sumOfAllUnabundant = function(maxNum){
   return sum;
 };
 
-var fibonacciBySize = function(size){
-  var
+var digitFractions = function(){
+  var fakeReductions = [];
+  var product = 1;
+  var i = 11;
+  var j;
+  while(i < 99){
+    if(i% 10 === 0){
+      i++;
+    }
+    j = i+1;
+    while(j < 100){
+      if(j%10 ===0){
+        j++;
+      }
+      if((i/j) === fakeDivide(i, j)){
+        fakeReductions.push([i,j]);
+      }
+      j++;
+    }
+    i++;
+  }
+  return fakeReductions;
+};
+var fakeDivide = function(numerator, denominator){
+  var nOnes = numerator % 10;
+  var nTens = Math.floor(numerator/10);
+  var dOnes = denominator %10;
+  var dTens = Math.floor(denominator/10);
+  if(nOnes === dTens){
+    return(nTens/dOnes);
+  }
+  if(nOnes === dOnes){
+    return nTens/dTens;
+  }
+  if(nTens === dOnes){
+    return nOnes/dTens;
+  }
+  if(nTens === dTens){
+    return nOnes/dOnes;
+  }
+  return false;
 
-}
+};
+var fiveDigit = function(){
+  var fivePowers = [];
+  for (var i = 0; i < 10; i++) {
+    fivePowers.push(Math.pow(i, 5));
+  }
+  var maxInt = 0;
+  var numDigits = 3;
+  var currentDigits = [];
+  var currentSum = 0;
+
+  while (numDigits < 7){
+    for (var i = 0; i < fivePowers.length; i++) {
+      if(fivePowers[i].toString().length <= numDigits && i > maxInt){
+        maxInt = i;
+      }
+    }
+
+
+
+  }
+};
+var
+
+var fibonacciBySize = function(size){
+
+
+
+};
