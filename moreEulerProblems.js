@@ -250,26 +250,120 @@ var fakeDivide = function(numerator, denominator){
 };
 var fiveDigit = function(){
   var fivePowers = [];
-  for (var i = 0; i < 10; i++) {
-    fivePowers.push(Math.pow(i, 5));
+  for (var base = 0; base < 10; base++) {
+    fivePowers.push(Math.pow(base, 5));
   }
   var maxInt = 0;
   var numDigits = 3;
-  var currentDigits = [];
+  var sum = 0;
   var currentSum = 0;
+  var allFiveDigits = [];
+  var sumArr;
 
   while (numDigits < 7){
+
     for (var i = 0; i < fivePowers.length; i++) {
       if(fivePowers[i].toString().length <= numDigits && i > maxInt){
         maxInt = i;
       }
     }
+    var possibleOptions = getAllCombinations(maxInt, numDigits);
 
-
+    for (var j = 0; j < possibleOptions.length; j++) {
+      currentSum = 0;
+      for (var k = 0; k < possibleOptions[j].length; k++) {
+        currentSum += fivePowers[possibleOptions[j][k]];
+      }
+      if(currentSum.toString().length === numDigits){
+        sumArr = currentSum.toString().split(' ');
+        if(isMixed(sumArr, possibleOptions[j])){
+          sum += currentSum;
+          allFiveDigits.push(possibleOptions[j]);
+        }
+      }
+    }
 
   }
 };
-var
+
+var isMixed = function(checkArr, fromArr){
+
+};
+
+var getAllCombinations = function(Options, numberToChoose){
+  var allOptions = [];
+  var mix = numberToChoose;
+  while(mix > 0){
+    mix += 1;
+  }
+
+};
+var betterWaysToMakeChange = function(amount, totalWays, coins){
+  if(coins === undefined){
+    coins = [1,2,5,10,20, 50, 100, 200];
+  }
+  if(totalWays === undefined){
+    totalWays = 0;
+  }
+
+};
+
+var waysToMakeChange = function(amount){
+    var coins = [1,2,5, 10, 20, 50, 100, 200];
+    var largestCoin = coins.length -1;
+    var ways = 0;
+    if (amount < 1){
+      return 0;
+    }
+    if (amount === 1){
+      return 1;
+    }
+    while (coins[largestCoin] >=  amount){
+      if(coins[largestCoin] === amount){
+        ways += 1;
+      }
+      coins.pop();
+      largestCoin -=1;
+    }
+    return makeChange(amount, ways, coins);
+
+};
+var makeChange = function(amount,totalCombs, coins){
+  if(amount === 0){
+    return(totalCombs +1);
+  }
+  if(amount < 0){
+    return(totalCombs);
+  }
+  for (var i = coins.length -1; i >= 0; i-=1) {
+    if(amount === coins[i]){
+      totalCombs +=1;
+      //totalCombs = makeChange(amount,totalCombs,coins.slice(0,coins.length-1));
+    }else{
+      totalCombs = makeChange(amount - coins[i], totalCombs, coins.slice(0, i+1));
+    }
+
+  }
+  return totalCombs;
+
+};
+var usedChars = [];
+var permArr = [];
+var permute = function(input) {
+  var i, ch;
+  for (i = 0; i < input.length; i++) {
+    ch = input.splice(i, 1)[0];
+    usedChars.push(ch);
+    if (input.length == 0) {
+      permArr.push(usedChars.slice());
+    }
+    permute(input);
+    input.splice(i, 0, ch);
+    usedChars.pop();
+  }
+  return permArr;
+};
+
 
 var fibonacciBySize = function(size){
 
