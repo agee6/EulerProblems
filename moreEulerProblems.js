@@ -336,12 +336,8 @@ var makeChange = function(amount,totalCombs, coins){
     return(totalCombs);
   }
   for (var i = coins.length -1; i >= 0; i-=1) {
-    if(amount === coins[i]){
-      totalCombs +=1;
-      //totalCombs = makeChange(amount,totalCombs,coins.slice(0,coins.length-1));
-    }else{
-      totalCombs = makeChange(amount - coins[i], totalCombs, coins.slice(0, i+1));
-    }
+
+    totalCombs = makeChange(amount - coins[i], totalCombs, coins.slice(0, i+1));
 
   }
   return totalCombs;
@@ -354,7 +350,7 @@ var permute = function(input) {
   for (i = 0; i < input.length; i++) {
     ch = input.splice(i, 1)[0];
     usedChars.push(ch);
-    if (input.length == 0) {
+    if (input.length === 0) {
       permArr.push(usedChars.slice());
     }
     permute(input);

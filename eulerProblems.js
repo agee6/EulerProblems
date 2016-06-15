@@ -301,6 +301,7 @@ var pythagoreanTriple = function(sumsTo){
   return "failed";
 
 };
+
 var isPrimeSpecial = function(number, primes){
 
   for (var i = 0; i < primes.length; i++) {
@@ -310,6 +311,7 @@ var isPrimeSpecial = function(number, primes){
   }
   return true;
 };
+
 var sumOfPrimes = function(maxVal){
   if(maxVal < 3){
     return 0;
@@ -327,7 +329,41 @@ var sumOfPrimes = function(maxVal){
     }
     i+=2;
   }
-  return sum;
+  primes.push(sum);
+  return primes;
+};
+var largestConsecutivePrimeSum = function(maxVal){
+  if(maxVal<3){
+    return null;
+  }
+  var largestSum = 2;
+  var largestLength = 1;
+  var primes = sumOfPrimes(maxVal/3+ 10);
+  var currentSum = primes.pop();
+  var currentLength = primes.length;
+  if(currentSum < maxVal && isPrime(currentSum)){
+    return currentSum;
+  }
+  var start = 0;
+
+  while( start < primes.length){
+    currentSum = 0;
+    currentLength = 0;
+    var j = start;
+    while(currentSum < maxVal && j < primes.length){
+      currentSum += primes[j];
+      currentLength += 1;
+      if(currentLength > largestLength && isPrime(currentSum)){
+        largestLength = currentLength;
+        largestSum = currentSum;
+      }
+      j++;
+    }
+    start++;
+  }
+
+  return largestSum;
+
 };
 var triangleNumber = function(divisors){
 
