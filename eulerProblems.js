@@ -77,7 +77,6 @@ var truncatedPrimes = function(){
       sum += i;
     }
     i += 2;
-
   }
   var finish = new Date();
   console.log((finish-start)/1000);
@@ -85,7 +84,6 @@ var truncatedPrimes = function(){
 };
 
 var truncatedPrimesFailed = function(){
-
   var firsts = ['2', '3', '5', '7'];
   var mids = ['3', '7', '9'];
   var lasts = ['3', '7'];
@@ -101,12 +99,9 @@ var truncatedPrimesFailed = function(){
         currentNum += mids[j];
         for (var k = 0; k < lasts.length; k++) {
           currentNum += lasts[k];
-
         }
       }
-
     }
-
   }
 };
 
@@ -288,18 +283,15 @@ var largestProduct = function(num){
 };
 
 var pythagoreanTriple = function(sumsTo){
-
   for (var a = 3; a < sumsTo/3; a++) {
     for (var b = 4; b < sumsTo/2; b++) {
       var c = Math.sqrt(a*a + b*b);
       if((a + b + c) === sumsTo){
         return a * b * c;
       }
-
     }
   }
   return "failed";
-
 };
 
 var isPrimeSpecial = function(number, primes){
@@ -365,6 +357,7 @@ var largestConsecutivePrimeSum = function(maxVal){
   return largestSum;
 
 };
+
 var triangleNumber = function(divisors){
 
   var currentTriangle = 0;
@@ -488,7 +481,6 @@ var primeFactorization = function(number){
     }
   }
   return primeFactors;
-
 };
 
 var numberOfDistinctPrimeFactors = function(number){
@@ -545,5 +537,4 @@ var consecutivePrimeFactors = function(num){
     i++;
   }
   return consecutive;
-
 };

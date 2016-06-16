@@ -254,7 +254,7 @@ var fiveDigit = function(){
     fivePowers.push(Math.pow(base, 5));
   }
   var maxInt = 0;
-  var numDigits = 3;
+  var numDigits = 2;
   var sum = 0;
   var currentSum = 0;
   var allFiveDigits = [];
@@ -267,6 +267,8 @@ var fiveDigit = function(){
         maxInt = i;
       }
     }
+
+
     var possibleOptions = getAllCombinations(maxInt, numDigits);
 
     for (var j = 0; j < possibleOptions.length; j++) {
@@ -275,37 +277,52 @@ var fiveDigit = function(){
         currentSum += fivePowers[possibleOptions[j][k]];
       }
       if(currentSum.toString().length === numDigits){
-        sumArr = currentSum.toString().split(' ');
-        if(isMixed(sumArr, possibleOptions[j])){
+        sumArr = possibleOptions[j].join('');
+        if(parseInt(sumArr) === currentSum){
+
           sum += currentSum;
           allFiveDigits.push(possibleOptions[j]);
         }
       }
     }
+    numDigits++;
 
   }
+  debugger;
+  return sum;
 };
 
 var isMixed = function(checkArr, fromArr){
 
 };
 
-var getAllCombinations = function(Options, numberToChoose){
+var getAllCombinations = function(options, numberToChoose){
   var allOptions = [];
   var mix = numberToChoose;
-  while(mix > 0){
-    mix += 1;
+  var chooseFrom = [];
+  var i = 0;
+  while(i < options){
+    chooseFrom.push(i);
+    i++;
   }
+  var currentOption = [];
+
+  return makeCombinations(chooseFrom, numberToChoose, allOptions, currentOption);
 
 };
-var betterWaysToMakeChange = function(amount, totalWays, coins){
-  if(coins === undefined){
-    coins = [1,2,5,10,20, 50, 100, 200];
+var makeCombinations = function(chooseFrom, numberToChoose, allOptions, currentOption){
+  if(currentOption.length === numberToChoose){
+    allOptions.push(currentOption);
+    return allOptions;
   }
-  if(totalWays === undefined){
-    totalWays = 0;
-  }
+  for (var i = chooseFrom.length; i >= 0; i--) {
 
+    currentOption.push(i);
+    allOptions = makeCombinations(chooseFrom,numberToChoose, allOptions,currentOption.slice());
+    currentOption = currentOption.slice();
+    currentOption.pop();
+  }
+  return allOptions;
 };
 
 var waysToMakeChange = function(amount){
@@ -362,7 +379,5 @@ var permute = function(input) {
 
 
 var fibonacciBySize = function(size){
-
-
 
 };
