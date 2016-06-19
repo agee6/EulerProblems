@@ -26,6 +26,74 @@ var largestPrimeFactor = function(number){
 
 };
 
+var largestPandigitalPrime = function(options){
+  if(options === undefined){
+    options = ['1', '2','3','4','5','6','7','8','9'];
+  }
+  var largest = null;
+  var possibleOptions = permute(options);
+  var current;
+
+  for (var i = 0; i < possibleOptions.length; i++) {
+    current = parseInt(possibleOptions[i].join(''));
+
+    if(current> largest && isPrime(current)){
+      largest = current;
+    }
+  }
+  if(largest === null && options.length > 1){
+    options.pop();
+    return largestPandigitalPrime(options);
+  }else if(options.length < 2){
+    return "you messed something up brother";
+  }else{
+    return largest;
+  }
+
+
+};
+
+var usedChars = [];
+var permArr = [];
+var permute = function(input) {
+  var i, ch;
+
+  for (i = 0; i < input.length; i++) {
+    ch = input.splice(i, 1)[0];
+    usedChars.push(ch);
+    if (input.length === 0) {
+      permArr.push(usedChars.slice());
+    }
+    permute(input);
+    input.splice(i, 0, ch);
+    usedChars.pop();
+  }
+  return permArr;
+};
+
+var largestPrime = function(maxInt){
+  if(maxInt < 2){
+    return false;
+  }
+  if(maxInt === 2){
+    return 2;
+  }
+  var i;
+  if(maxInt%2 === 0){
+    i = maxInt;
+  }else{
+    i = maxInt - 1;
+  }
+
+
+  while(i > 0){
+    if(isPrime(i)){
+      return i;
+    }
+    i -=1;
+  }
+};
+
 var isPrime = function(num){
   if (num === 2){
     return true;
@@ -496,6 +564,7 @@ var numberOfDistinctPrimeFactors = function(number){
   var primeFactors = primeFactorization(number);
   return primeFactors.length;
 };
+
 
 
 var pathCounter = function(size){

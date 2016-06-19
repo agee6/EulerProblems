@@ -2,5 +2,5 @@
 //continguous if they share as side
 
 var numberOfIslands = function(array){
-  var
+
 };
