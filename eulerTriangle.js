@@ -53,6 +53,7 @@ var champernownNumber = function(n){
     Math.floor(n/10);
   }
 };
+
 var cNumb = function(n){
   if(n< 0){
     return null;
@@ -122,6 +123,7 @@ var pandigitalMultiples = function(){
   var j, currentVal;
   var currentSet = [];
   var currentLength = 0;
+  var allPandigitalMultiples = [];
 
   while(i < 10000){
     currentLength = 0;
@@ -136,10 +138,48 @@ var pandigitalMultiples = function(){
     currentVal = parseInt(currentSet.join(''));
     if(currentVal > largest && isPandigital(currentVal)){
       largest = currentVal;
+      allPandigitalMultiples.push(currentVal);
     }
     i++;
   }
   return largest;
+};
+
+var sumPandigitalProducts = function(){
+  var sum = 0;
+  var i = 2;
+  var j = 9999;
+  var currentProduct;
+  var currentPanDigital;
+  var longEnough = true;
+  var allProducts = {};
+  while(i < 100){
+    while(longEnough && j > i){
+      currentProduct = i * j;
+      currentPanDigital = i.toString() + j.toString() + currentProduct.toString();
+      if(currentPanDigital.length < 9 ){
+        longEnough = false;
+      }else if(currentPanDigital.length > 9){
+        j--;
+      }else{
+        if(isPandigital(parseInt(currentPanDigital))){
+          if(allProducts[currentProduct] === undefined){
+            sum += currentProduct;
+            allProducts[currentProduct] = true;
+          }
+        }
+        j--;
+      }
+    }
+    i++;
+    longEnough = true;
+    if(i > 9){
+      j = 999;
+    }else{
+      j = 9999;
+    }
+  }
+  return sum;
 };
 
 var isPandigital = function(num){
@@ -150,6 +190,9 @@ var isPandigital = function(num){
   }
   var digitHash = {};
   for (var i = 0; i < numString.length; i++) {
+    if(numString[i] === '0'){
+      return false;
+    }
     if(digitHash[numString[i]] === undefined){
       digitHash[numString[i]] = 1;
     }else{
