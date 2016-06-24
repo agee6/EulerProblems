@@ -49,8 +49,6 @@ var largestPandigitalPrime = function(options){
   }else{
     return largest;
   }
-
-
 };
 
 var usedChars = [];
@@ -110,6 +108,7 @@ var isPrime = function(num){
   }
   return true;
 };
+
 var isTruncatedPrime = function(number){
   var last = number % 10;
   if(!(last === 7 || last === 3) ){
@@ -606,4 +605,40 @@ var consecutivePrimeFactors = function(num){
     i++;
   }
   return consecutive;
+};
+
+
+var lowestNonGoldbach = function(){
+  var i = 9;
+  var goldback = true;
+  while(goldback){
+    if(!isPrime(i)){
+      console.log(i); 
+      if(!isGoldbach(i)){
+        return i;
+      }
+    }
+    i+=2;
+  }
+};
+
+var isGoldbach = function(num){
+  // if(num % 2 === 0){
+  //   return false;
+  // }
+  // if(isPrime(num)){
+  //   return false;
+  // }
+  var theSqrt;
+  var thePrime = num - 2;
+  while(thePrime > 2){
+    if(isPrime(thePrime)){
+      theSqrt = Math.sqrt((num - thePrime)/2);
+      if(Math.floor(theSqrt) === theSqrt){
+        return true;
+      }
+    }
+    thePrime -=2;
+  }
+  return false;
 };
