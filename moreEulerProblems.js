@@ -361,7 +361,53 @@ var makeChange = function(amount,totalCombs, coins){
 
 };
 
+var getNextfib = function(fibs){
+  var first = fibs[fibs.length -1].split('').reverse();
+  var second = fibs[fibs.length - 2].split('').reverse();
+  var numberTwo, ones;
+  var carryOver = 0;
+  var curSum = 0;
+  var solutionString = '';
+  for (var i = 0; i < first.length; i++) {
+    if(second[i] === undefined){
+      numberTwo = 0;
+    }else{
+      numberTwo = parseInt(second[i]);
+    }
+    curSum = parseInt(first[i]) + numberTwo + carryOver;
+    ones = curSum % 10;
+    solutionString  = ones.toString() + solutionString;
+    carryOver = Math.floor(curSum /10);
+  }
+  if( carryOver > 0){
+    solutionString = carryOver.toString() + solutionString;
+
+  }
+
+  return(solutionString);
+
+};
+
 
 var fibonacciBySize = function(size){
+  var fibs = ['1','1'];
+  var minIndex = 1;
+  var curSize = 1;
+  var fibsLength = 2;
+  var tempSize;
+  while(curSize < size){
+    fibs.push(getNextfib(fibs));
+    fibs.shift();
+    fibsLength += 1;
+    tempSize = fibs[fibs.length - 1].length;
+  
+    if(tempSize > curSize){
+      curSize = tempSize;
+      minIndex = fibsLength;
+    }
+  }
+
+
+  return fibsLength;
 
 };
