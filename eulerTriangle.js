@@ -228,69 +228,83 @@ var codedTriangleNumbers = function(){
   debugger;
   return count;
 };
-
 var isTriangleNum = function(num){
   if(num < 1){
     return false;
   }
-  if(num === 1){
-    return true;
-  }
-  var facts = getFactors(num * 2);
-  facts = facts.sort(function(a,b){
-    return a-b;
-  });
-  var i = 0;
-  while(i < facts.length - 1){
-    if(facts[i+1] - facts[i] === 1){
+  var i = 1;
+  var currentTriangle = 1;
+  while(currentTriangle <= num){
+    if(currentTriangle === num){
       return true;
     }
-    i++;
+    i += 1;
+    currentTriangle = (i * (i+1))/2;
   }
   return false;
 };
-var isPrime = function(num){
-  if (num === 2){
-    return true;
-  }
-  if (num < 2 || num % 2 === 0){
-    return false;
-  }
-  var i = 3;
-  while(i < num){
-    if(num % i === 0){
-      return false;
-    }
-    i += 2;
-  }
-  return true;
-};
 
-var getFactors = function(number){
-  if(number <1){
-    return "not yet implemented";
-  }
-  if(number === 1){
-    return [1];
-  }
-  var factors = [1];
-  if(isPrime(number)){
-    factors.push(number);
-    return factors;
-  }
-  var i = 2;
-  var theSqrt = Math.sqrt(number);
-  while(i < theSqrt){
-    if(number % i === 0){
-      factors.push(i);
-      factors.push(number/i);
-    }
-    i++;
-  }
-  if(theSqrt === Math.floor(theSqrt)){
-    factors.push(theSqrt);
-    factors.push(theSqrt);
-  }
-  return factors;
-};
-console.log("banana");
+// var isTriangleNum = function(num){
+//   if(num < 1){
+//     return false;
+//   }
+//   if(num === 1){
+//     return true;
+//   }
+//   var facts = getFactors(num * 2);
+//   facts = facts.sort(function(a,b){
+//     return a-b;
+//   });
+//   var i = 0;
+//   while(i < facts.length - 1){
+//     if(facts[i+1] - facts[i] === 1){
+//       return true;
+//     }
+//     i++;
+//   }
+//   return false;
+// };
+// var isPrime = function(num){
+//   if (num === 2){
+//     return true;
+//   }
+//   if (num < 2 || num % 2 === 0){
+//     return false;
+//   }
+//   var i = 3;
+//   while(i < num){
+//     if(num % i === 0){
+//       return false;
+//     }
+//     i += 2;
+//   }
+//   return true;
+// };
+//
+// var getFactors = function(number){
+//   if(number <1){
+//     return "not yet implemented";
+//   }
+//   if(number === 1){
+//     return [1];
+//   }
+//   var factors = [1];
+//   if(isPrime(number)){
+//     factors.push(number);
+//     return factors;
+//   }
+//   var i = 2;
+//   var theSqrt = Math.sqrt(number);
+//   while(i < theSqrt){
+//     if(number % i === 0){
+//       factors.push(i);
+//       factors.push(number/i);
+//     }
+//     i++;
+//   }
+//   if(theSqrt === Math.floor(theSqrt)){
+//     factors.push(theSqrt);
+//     factors.push(theSqrt);
+//   }
+//   return factors;
+// };

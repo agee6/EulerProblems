@@ -6,11 +6,12 @@
 
 function Dog(name, age){
   this.name = name;
-  this. age = age;
+  this.age = age;
   this.bark = function(){
     console.log("woof, woof, sir");
   };
 }
+
 Dog.speak = function(){
   console.log('yo');
 };
@@ -27,11 +28,11 @@ Dog.prototype.greetInDog = function(){
   console.log(greeting);
 };
 
-var inherits = function(Child, Father){
+var inherits = function(Child, Parent){
   function Surrogate(){
     this.constructor = Child;
   }
-  Surrogate.prototype = Father.prototype;
+  Surrogate.prototype = Parent.prototype;
   Child.prototype = new Surrogate();
 
 };
@@ -86,4 +87,4 @@ var minimumPossibleWidth = function(string, numberOfLines){
 		guessLines = newString.split('\/n').length + 1;
 	}
 	return guess;
-}; 
+};
