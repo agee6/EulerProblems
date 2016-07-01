@@ -244,6 +244,41 @@ var isTriangleNum = function(num){
   return false;
 };
 
+var pentHexandTri = function(start){
+    var t = 286;
+    var p = 166;
+    var h = 144;
+    var done = false;
+    var pent, tri, hex;
+    while(!done){
+      tri = triangle(t);
+      while(pentagonal(p) < tri){
+        p++;
+      }
+      pent = pentagonal(p);
+      if(tri === pent){
+        while(hexagonal(h) < pent){
+          h++;
+        }
+        if(hexagonal(h) === pent){
+          return pent;
+        }
+      }
+      t++;
+    
+    }
+};
+var triangle = function(num){
+  return ((num*(num + 1))/2);
+};
+var pentagonal = function(n){
+  return((n*(3*n - 1))/2);
+};
+var hexagonal = function(n){
+  return(n * (2 * n - 1));
+};
+
+
 // var isTriangleNum = function(num){
 //   if(num < 1){
 //     return false;
