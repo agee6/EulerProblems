@@ -111,18 +111,6 @@ var sumOfPowers = function(num){
   return sum;
 };
 
-var powerDigitSum = function(base, power){
-  var sum = 0;
-  var sumString = '';
-  var maxInt = 9007199254740991;
-  var tempPow = 1;
-  var tempPowString = '';
-  var i = 0;
-  while(i <= power){
-    return "failing!";
-  }
-};
-
 var divisors = function(num){
   //this is divisors not including self
   if(num < 2){
@@ -400,7 +388,7 @@ var fibonacciBySize = function(size){
     fibs.shift();
     fibsLength += 1;
     tempSize = fibs[fibs.length - 1].length;
-  
+
     if(tempSize > curSize){
       curSize = tempSize;
       minIndex = fibsLength;
