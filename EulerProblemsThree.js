@@ -135,6 +135,19 @@ var lexiographicPerm = function(num){
   }
   return "number not found";
 };
+var lexiographicPerm2 = function(num){
+  console.time('possible');
+  var possible = permute("0123456789".split(''));
+  console.timeEnd('possible');
+  console.time('sort');
+  possible.sort(function(a,b){
+    return(parseInt(a.join('')) - parseInt(b.join('')));
+  });
+  console.timeEnd('sort');
+  debugger;
+  return(possible[num-1].join(''));
+};
+
 var isPermutation = function(num){
   var stringNum = num.toString();
   var numbersObj = {};
