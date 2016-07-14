@@ -57,7 +57,7 @@ Promise.all = function(promiseArr){
       });
     }
 
-  }); 
+  });
 
   return thePromise;
 };

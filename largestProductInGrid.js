@@ -10,23 +10,23 @@ function getRecordsFromFile(filename, cb) {
       return;
     }
     var theDataArr = data.split('\n');
-    var finalData = [];
-    for (var i = 0; i < theDataArr.length - 1; i++) {
-      finalData.push(theDataArr[i].split(' '));
-    }
+    // var finalData = [];
+    // for (var i = 0; i < theDataArr.length - 1; i++) {
+    //   finalData.push(theDataArr[i].split(' '));
+    // }
     // var finalData = [];
     // while(i < theDataArr.length - 1){
     //   finalData.push(theDataArr[i].split(' '));
     //   i++;
     // }
-    console.log(finalData);
-    cb(finalData);
+
+    cb(theDataArr);
   });
 
 }
 
 var largeSum = function(numberArr){
-  var currentSum = numberArr[0].split('').slice(12).reverse().join('');
+  var currentSum = numberArr[0].split('').reverse().join('');
   var carry = 0;
   var tempNum, curr;
   var tempSum = '';
@@ -35,25 +35,30 @@ var largeSum = function(numberArr){
     tempNum = numberArr[i].split('').reverse().join('');
     carry = 0;
     console.log(tempNum);
-    for (var j = 0; j < 12; j++) {
+    for (var j = 0; j < currentSum.length; j++) {
       // console.log(tempNum[j]);
-      curr = parseInt(tempNum[j]) + parseInt(currentSum[j]) + carry;
-      carry = Math.floor(curr/10);
+      if(tempNum[j] === undefined){
+        curr =  parseInt(currentSum[j]) + carry;
+        carry = Math.floor(curr/10);
+      }else{
+        curr = parseInt(tempNum[j]) + parseInt(currentSum[j]) + carry;
+        carry = Math.floor(curr/10);
+      }
       // console.log(carry);
       var toAdd = curr % 10;
       // console.log(toAdd);
       tempSum = tempSum + toAdd;
       console.log(tempSum);
     }
+    if(carry !== 0){
+      tempSum = tempSum + carry;
+    }
 
     currentSum = tempSum;
     tempSum = '';
   }
   console.log(currentSum);
-  var finalSum ='';
-  for (var i = 0; i < 10; i++) {
-    finalSum = currentSum[i] + finalSum;
-  }
+  var finalSum = currentSum.split('').reverse().join('');
   console.log(finalSum);
   return finalSum;
 };
@@ -167,7 +172,7 @@ var getMax = function(array){
   return max;
 };
 
-var records = getRecordsFromFile("triangleGrid.txt", maximumPathSum);
+var records = getRecordsFromFile("reallyBigNumber.txt", largeSum);
 
 var buildGraph = function(grid){
 
