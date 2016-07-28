@@ -23,6 +23,24 @@ var latticePaths = function(size){
   return finishedPathCount;
 };
 
+var latticePathsThree = function(size){
+  if(size < 2){
+    return 1;
+  }
+  var currentRow = [1, 1];
+  var nextRow = [];
+  for (var i = 0; i < (size * 2) -1; i++) {
+    nextRow = [1];
+    for (var j = 0; j < currentRow.length -1 ; j++) {
+
+      nextRow.push(currentRow[j] + currentRow[j +1]);
+    }
+    nextRow.push(1);
+    currentRow = nextRow;
+  }
+  return currentRow[Math.floor(currentRow.length/2)];
+};
+
 function Path(position){
   this.pos = position;
 
@@ -144,7 +162,6 @@ var lexiographicPerm2 = function(num){
     return(parseInt(a.join('')) - parseInt(b.join('')));
   });
   console.timeEnd('sort');
-  debugger;
   return(possible[num-1].join(''));
 };
 
@@ -199,6 +216,11 @@ var distinctPowers = function(start, finish){
     return count;
 };
 
+var primePermutation = function(numDigits){
+  var possibleDigits = '0123456789'.split('');
+
+};
+
 var inLowestPower = function(num){
   var base = 2;
   var pow = 0;
@@ -220,5 +242,4 @@ var inLowestPower = function(num){
     base++;
   }
   return [num, 1];
-
 };
