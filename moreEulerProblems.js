@@ -46,36 +46,52 @@ var sumDigitiFactorial = function(maxNum){
 };
 
 var pentagonal = function(n){
-  var pent = (3*n -1) * n / 2 ;
+  var pent = (((3*n) -1) * n) / 2 ;
   return pent;
 };
 var isPentagonal = function(num){
-  var n = (2*num +1) /3;
-  debugger;
-  if(Math.floor(n) === n && n > 1){
-    return true;
-  }else{
+  if(num === 0){
     return false;
   }
+  var check = Math.sqrt(1 + (24 * num));
+  if(Math.floor(check) !== check){
+    return false;
+  }
+  var check2 = ( 1+ check)/6;
+  var check3 = (1 - check)/6;
+  //debugger;
+  if(Math.floor(check2) === check2){
+    return true;
+  }
+  if(Math.floor(check3) === check3 && check3 > 0){
+    return true;
+  }
+  return false;
 };
 
-var pairPents = function(){
-  var i = 1;
-  var j = 2;
-  while( i < 1000){
-    while(j< i +100){
+var pairPents = function(startVal, maxBot){
+  var i = startVal;
+  var j = startVal + 1;
+  var minD = null;
+  while( i < maxBot){
+    while(j < maxBot + 1){
       if(isPentagonal(pentagonal(i) + pentagonal(j))){
-        if(isPentagonal(pentagonal(j) - pentagonal(i))){
 
-          return pentagonal(j) - pentagonal(i);
+        var dif = Math.abs(pentagonal(j) - pentagonal(i));
+        if(isPentagonal(dif)){
+          debugger;
+          if(minD === null || dif < minD){
+            minD = dif;
+            debugger;
+          }
         }
       }
       j++;
     }
     i++;
-    j = i +1;
+    j = i+1;
   }
-  return "we failed!";
+  return minD;
 };
 
 var sumOfPowers = function(num){
