@@ -99,11 +99,11 @@ var primePermutations = function(){
 
   for (var i = 0; i < dOp.length - 3; i++) {
 
-    for (var j = i + 1; j < dOp.length - 2; j++) {
+    for (var j = 0; j < dOp.length - 2; j++) {
 
-      for (var k = j + 1;  k < dOp.length - 1; k++) {
+      for (var k = 0;  k < dOp.length - 1; k++) {
 
-        for (var l = k + 1; l < dOp.length; l++) {
+        for (var l = 0; l < dOp.length; l++) {
 
           var choices = permute([dOp[i], dOp[j], dOp[k], dOp[l]], [],[]).sort(function(a,b){
             return(parseInt(a.join('')) - parseInt(b.join('')));
@@ -125,17 +125,22 @@ var primePermutations = function(){
   }
   debugger;
   var finalFinal = [];
+  var temp = [];
   for (var y = 0; y < finalSols.length; y++) {
     for (var idx = 0; idx < finalSols[y].length - 1; idx++) {
       for (var q = idx + 1; q < finalSols[y].length; q++) {
         if(finalSols[y][q] - finalSols[y][idx] === 3330){
-          finalFinal.push(finalSols[y][idx]);
-          finalFinal.push(finalSols[y][q]);
+          temp.push(finalSols[y][idx]);
+          temp.push(finalSols[y][q]);
         }
       }
+      if(temp.length > 2){
+        finalFinal.push(temp);
+      }
+      temp = []; 
     }
   }
-  debugger; 
+  debugger;
   return finalSols;
 
 };
