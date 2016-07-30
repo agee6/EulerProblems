@@ -550,6 +550,8 @@ var primeFactorization = function(number){
   return primeFactors;
 };
 
+
+
 var numberOfDistinctPrimeFactors = function(number){
   if(number === 1){
     return 0;
@@ -613,7 +615,7 @@ var lowestNonGoldbach = function(){
   var goldback = true;
   while(goldback){
     if(!isPrime(i)){
-      console.log(i); 
+      console.log(i);
       if(!isGoldbach(i)){
         return i;
       }
